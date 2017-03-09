@@ -1,12 +1,16 @@
 charr - character operators 4 R
 ================
-March 3, 2017
+March 9, 2017
 
-R is a lovely programming language. Nonetheless, working with strings in R can be a little cumbersome. Especially, if one is accustomed to easy string operations as available in Python or JavaScript. <code>charr</code> attempts to make working with strings and characters in R as easy as ABC.
+R is a lovely programming language. Nonetheless, working with strings in R can be a little cumbersome. <code>charr</code> attempts to make working with strings and characters in R as easy as ABC.
+
+------------------------------------------------------------------------
 
 ### Using charr
 
 <code>source('<https://github.com/chiefBiiko/charr/raw/master/charr.R>')</code>
+
+------------------------------------------------------------------------
 
 ### Character concatenation
 
@@ -18,6 +22,8 @@ c <- ' makes lucky'
 ```
 
     [1] "sakawa spirit makes lucky"
+
+------------------------------------------------------------------------
 
 ### Character repetition
 
@@ -35,6 +41,8 @@ Repeat length 1 character vectors with the <code>%r%</code> operator:
 
     [1] "Enter the secret!!!!!!!!!!"
 
+------------------------------------------------------------------------
+
 ### Character subsetting
 
 Subset length 1 character vectors with the indices of its characters using the <code>%i%</code> and <code>%i=%</code> operators. The former performs a get operation, whereas the latter performs a set operation.
@@ -51,7 +59,7 @@ Get characters of a length 1 character vector using the <code>%i%</code> operato
 
 ``` r
 x <- 'Get rid of dumb characters' %i% -c(12:16)
-x
+print(x)
 ```
 
     [1] "Get rid of characters"
@@ -63,18 +71,37 @@ If the supplied subset indices are out of bounds (exceed the number of character
 Set characters of a length 1 character vector using the <code>%i=%</code> operator:
 
 ``` r
-'HELLO WORLD' %i=% c(7:11, 'YYYYY')
+'HELLO WORLD' %i=% c(7:11, rep('Y', 5))
 ```
 
     [1] "HELLO YYYYY"
 
 ``` r
 y <- 'no money no funny'
-y %i=% c(c(1, 13:17), 'NXXXXX')
+y %i=% c(c(1, 13:17), c('N', rep('X', 5)))
 ```
 
     [1] "No money no XXXXX"
 
-WARNING: Fails if the replacement string contains a comma or whitespace!
+The right operand must be a length 2 vector combined with <code>c()</code>, supplying a vector of replacement indices as first item and a vector of replacement values as second item. Note that the replacement indices are matched to the replacement values from left to right. Therefore, the number of replacement indices must equal the number of replacement values. Also, each replacement value must be a single character. In case the left operand is not a string literal but an existing object it is reassigned.
 
-The right operand must be a length 2 vector combined with <code>c()</code>, supplying the replacement indices as first item and the replacement values as second item. Note that the replacement indices are matched to the replacement value's single characters from left to right. Therefore, the number of replacement indices must equal the number of characters of the replacement value. In case the left operand is not a string literal but an existing object it is reassigned.
+------------------------------------------------------------------------
+
+### Character insertion
+
+Insert characters *after* specified indices into a length 1 character vector using the <code>%i==%</code> operator:
+
+``` r
+'HELLO WORLD' %i==% c(c(5, 11), c(',', '!!!'))
+```
+
+    [1] "HELLO, WORLD!!!"
+
+``` r
+abc <- 'ABC' %i==% c(1:2, c('|', '|'))
+print(abc) 
+```
+
+    [1] "A|B|C"
+
+The right operand must be a length 2 vector combined with <code>c()</code>, supplying a vector of indices after which to insert strings as first item and a vector of insertion values (strings to insert) as second item. Note that the insertion indices are matched to the insertion values from left to right. Therefore, the number of insertion indices must equal the number of insertion values. The insertion values can be multi character strings. In case the left operand is not a string literal but an existing object it is reassigned.
