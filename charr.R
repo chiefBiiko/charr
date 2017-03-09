@@ -30,39 +30,83 @@
 
 '%i=%' <- function(a, b) UseMethod('%i=%')
 '%i=%.character' <- function(a, b) {
-  # Sets a string subset. !!FAILS if b[2] contains a comma or whitespace!!
+  # Sets a string subset.
   # @param {chr} a String literal or object of class chr, must be of length 1
-  # @param {int/chr} b Vector of length 2, where length(1st) == nchar(2nd);
+  # @param {int/chr} b Vector of length 2, where length(1st) == length(2nd);
   #                      1st item: int vector with indices to replace;
-  #                      2nd item: length 1 chr vector with characters to replace;
+  #                      2nd item: chr vector with characters to replace;
   #                      the integers/characters of the 1st and 2nd item are
   #                      matched from left to right
   # @return {chr} Length 1 chr vector with characters in a replaced according to b;
   #                 if a is an existing object it will be reassigned
   # @example
-  #   > 'HELLO WORLD' %i=% c(7:11, 'YYYYY')
+  #   > 'HELLO WORLD' %i=% c(7:11, rep('Y', 5))
   #   [1] "HELLO YYYYY"
-  #   x.chr %i=% c(4:8, 'XXXXX')
+  #   > x <- 'Frank Fraud'
+  #   > x %i=% c(c(1, 9), c('C', '@'))
+  #   [1] "Crank Fr@ud"
   stopifnot(is.character(a), length(a) == 1)
-  name <- as.character(substitute(a))  # object/variable name
+  name <- paste0(gsub('\\(|\\)', '', as.character(substitute(a))), collapse='')  # object/variable name
   value <- gsub('"', '', deparse(a))  # character value
-  setr <- deparse(substitute(b))  # subset vector with indices and replacement value
-  seti <- strsplit(substr(setr, 3, nchar(setr) - 1), ',[^,]*$')[[1]]  # indices
-  setv <- trimws(gsub('"', '',  # replacement value  # if err shows up trimws coud be the issue!
-                      strsplit(substr(setr, 3, nchar(setr) - 1), '^.*,(?<!\\d)', perl=T)[[1]][2],
-                      fixed=T))
-  # throw error if the number of indices does not equal the number of values
-  if (length(eval(parse(text=seti))) != nchar(setv)) {
+  setr <- eval(substitute(b))  # subset vector with indices and replacement values
+  seti <- as.integer(setr[1:(length(setr) / 2)])  # indices
+  setv <- setr[(length(setr) / 2 + 1):length(setr)]  # vector of replacement values
+  # throwing errors
+  if (length(setr) %% 2 != 0) {
     stop('The number of replacement indices does not equal the number of replacement characters.')
   }
+  if (!all(nchar(setv) == 1)) stop('Each replacement value must be a single character only!')
+  if (!all(seti %in% 1:nchar(value))) stop('Replacement indices out of bounds!')
   arr <- unlist(strsplit(value, ''))  # character value split into singletons
   i <- 0
-  for (c in eval(parse(text=seti))) {  # c is a single index to be replaced
+  for (index in seti) {  # index to be replaced
     i <- i + 1  # index of the replacement character
-    arr[c] <- substr(setv, i, i)  # replacing
+    arr[index] <- setv[i]  # replacing
   }
   if (exists(name)) {
     assign(name, paste0(arr, collapse=''), pos=1L)  # assigning in parent scope
   }
   return(paste0(arr, collapse=''))
+}
+
+'%i==%' <- function(a, b) UseMethod('%i==%')
+'%i==%.character' <- function(a, b) {
+  # Inserts characters into a string after specified indices.
+  # @param {chr} a String literal or object of class chr, must be of length 1
+  # @param {int/chr} b Vector of length 2, where length(1st) == length(2nd);
+  #                      1st item: int vector with indices to insert after;
+  #                      2nd item: chr vector with strings to insert;
+  #                      the integers/strings of the 1st and 2nd item are
+  #                      matched from left to right
+  # @return {chr} Length 1 chr vector with the given strings inserted;
+  #                 if a is an existing object it will be reassigned
+  # @example
+  #   > 'HELLO WORLD' %i==% c(c(5, 11), c(',', '!!!'))
+  #   [1] "HELLO, WORLD!!!"
+  #   > 'ABC' %i==% c(1:2, c('|', '|'))
+  #   [1] "A|B|C"
+  stopifnot(is.character(a), length(a) == 1)
+  name <- paste0(gsub('\\(|\\)', '', as.character(substitute(a))), collapse='')  # object/variable name
+  value <- gsub('"', '', deparse(a))  # character value
+  setr <- eval(substitute(b))  # subset vector with indices and replacement values
+  seti <- as.integer(setr[1:(length(setr) / 2)])  # indices
+  setv <- setr[(length(setr) / 2 + 1):length(setr)]  # vector of replacement values
+  # throwing errors
+  if (!all(is.integer(seti) || is.character(setv))) stop('Falsy input!')
+  if (length(setr) %% 2 != 0) {
+    stop('The number of replacement indices does not equal the number of replacement characters.')
+  }
+  arr <- unlist(strsplit(value, ''))  # character value split into singletons
+  if (!all(seti %in% 1:length(arr))) stop('Some indices are out of bounds...')
+  m <- list(i=0, head=0, accu=list())  # memory
+  for (index in seti) {  # insert after original's index c
+    m$i <- m$i + 1  # index of slice
+    m$accu[[m$i]] <- c(arr[m$head:index], setv[m$i])  # split and append
+    m$head <- index + 1  # remember last slice index aka new head
+  }
+  if (m$head %in% 1:length(arr)) m$accu[[m$i + 1]] <- arr[m$head:length(arr)]  # consume remainder
+  if (exists(name)) {
+    assign(name, paste0(unlist(m$accu), collapse=''), pos=1L)  # assigning in parent scope
+  }
+  return(paste0(unlist(m$accu), collapse=''))
 }
