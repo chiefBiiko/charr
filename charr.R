@@ -69,8 +69,8 @@
   return(paste0(arr, collapse=''))
 }
 
-'%i==%' <- function(a, b) UseMethod('%i==%')
-'%i==%.character' <- function(a, b) {
+'%ii=%' <- function(a, b) UseMethod('%ii=%')
+'%ii=%.character' <- function(a, b) {
   # Inserts characters into a string after specified indices.
   # @param {chr} a String literal or object of class chr, must be of length 1
   # @param {int/chr} b Vector of length 2, where length(1st) == length(2nd);
@@ -81,9 +81,9 @@
   # @return {chr} Length 1 chr vector with the given strings inserted;
   #                 if a is an existing object it will be reassigned
   # @example
-  #   > 'HELLO WORLD' %i==% c(c(5, 11), c(',', '!!!'))
+  #   > 'HELLO WORLD' %ii=% c(c(5, 11), c(',', '!!!'))
   #   [1] "HELLO, WORLD!!!"
-  #   > 'ABC' %i==% c(1:2, c('|', '|'))
+  #   > 'ABC' %ii=% c(1:2, c('|', '|'))
   #   [1] "A|B|C"
   stopifnot(is.character(a), length(a) == 1)
   name <- paste0(gsub('\\(|\\)', '', as.character(substitute(a))), collapse='')  # object/variable name
@@ -99,7 +99,7 @@
   arr <- unlist(strsplit(value, ''))  # character value split into singletons
   if (!all(seti %in% 1:length(arr))) stop('Some indices are out of bounds...')
   m <- list(i=0, head=0, accu=list())  # memory
-  for (index in seti) {  # insert after original's index c
+  for (index in seti) {  # insert after original's index
     m$i <- m$i + 1  # index of slice
     m$accu[[m$i]] <- c(arr[m$head:index], setv[m$i])  # split and append
     m$head <- index + 1  # remember last slice index aka new head
