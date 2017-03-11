@@ -89,16 +89,16 @@ The right operand must be a length 2 vector combined with <code>c()</code>, supp
 
 ### Character insertion
 
-Insert characters *after* specified indices into a length 1 character vector using the <code>%i==%</code> operator:
+Insert characters *after* specified indices into a length 1 character vector using the <code>%ii=%</code> operator:
 
 ``` r
-'HELLO WORLD' %i==% c(c(5, 11), c(',', '!!!'))
+'HELLO WORLD' %ii=% c(c(5, 11), c(',', '!!!'))
 ```
 
     [1] "HELLO, WORLD!!!"
 
 ``` r
-abc <- 'ABC' %i==% c(1:2, c('|', '|'))
+abc <- 'ABC' %ii=% c(1:2, c('|', '|'))
 print(abc) 
 ```
 
