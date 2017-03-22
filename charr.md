@@ -51,6 +51,8 @@ Character subsetting
 
 Subset length 1 character vectors with the indices of its characters using the <code>%i%</code> and <code>%i=%</code> operators. The former performs a get operation whereas the latter performs a set operation.
 
+> The <code>%i=%</code> and <code>%ii=%</code> operators map their input strings according to their right operand and return the resulting string. Thus, to really perform a set operation on an existing string variable one has to reassign the return value of the corresponding operator.
+
 ### Getting characters
 
 Get characters of a length 1 character vector using the <code>%i%</code> operator:
@@ -110,5 +112,3 @@ print(abc)
     [1] "A|B|C"
 
 The right operand must be a length 2 vector supplying a vector of indices after which to insert strings as first item and a vector of insertion values (strings to insert) as second item. Note that the insertion indices are matched to the insertion values from left to right. Therefore, the number of insertion indices must equal the number of insertion values. The insertion values can be multi character strings.
-
-> The <code>%i=%</code> and <code>%ii=%</code> operators map its input strings according to their right operand and return the resulting string. Thus, to really perform a set operation on an existing string variable one has to reassign the return value of the corresponding operator.
