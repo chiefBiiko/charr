@@ -19,8 +19,8 @@ Character concatenation
 Concatenate length 1 character vectors with the <code>%+%</code> operator:
 
 ``` r
-c <- ' makes lucky'
-'sakawa' %+% ' spirit' %+%  c
+z <- ' makes lucky'
+'sakawa' %+% ' spirit' %+%  z
 ```
 
     [1] "sakawa spirit makes lucky"
@@ -68,7 +68,7 @@ print(x)
 
     [1] "Get rid of characters"
 
-If the supplied subset indices are out of bounds (exceed the number of characters of the left operand) the return value contains all characters from the supplied start index until the end of the input string. In order to erase characters wrap their indices in <code>c()</code> prefixed with a minus sign.
+In order to erase characters wrap their indices in <code>c()</code> prefixed with a minus sign. If the supplied subset indices are out of bounds (exceed the number of characters of the left operand) the return value contains all characters from the supplied start index until the end of the input string.
 
 ### Setting characters
 
@@ -87,7 +87,7 @@ y %i=% c(c(1, 13:17), c('N', rep('X', 5)))
 
     [1] "No money no XXXXX"
 
-The right operand must be a length 2 vector supplying a vector of replacement indices as first item and a vector of replacement values as second item. Note that the replacement indices are matched to the replacement values from left to right. Therefore, the number of replacement indices must equal the number of replacement values. Each replacement value must be a single character. In case the left operand is not a string literal but an existing object it is reassigned.
+The right operand must be a length 2 vector supplying a vector of replacement indices as first item and a vector of replacement values as second item. Note that the replacement indices are matched to the replacement values from left to right. Therefore, the number of replacement indices must equal the number of replacement values. Each replacement value must be a single character.
 
 ------------------------------------------------------------------------
 
@@ -109,4 +109,6 @@ print(abc)
 
     [1] "A|B|C"
 
-The right operand must be a length 2 vector supplying a vector of indices after which to insert strings as first item and a vector of insertion values (strings to insert) as second item. Note that the insertion indices are matched to the insertion values from left to right. Therefore, the number of insertion indices must equal the number of insertion values. The insertion values can be multi character strings. In case the left operand is not a string literal but an existing object it is reassigned.
+The right operand must be a length 2 vector supplying a vector of indices after which to insert strings as first item and a vector of insertion values (strings to insert) as second item. Note that the insertion indices are matched to the insertion values from left to right. Therefore, the number of insertion indices must equal the number of insertion values. The insertion values can be multi character strings.
+
+> The <code>%i=%</code> and <code>%ii=%</code> operators map its input strings according to their right operand and return the resulting string. Thus, to really perform a set operation on an existing string variable one has to reassign the return value of the corresponding operator.

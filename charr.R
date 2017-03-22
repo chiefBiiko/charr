@@ -63,9 +63,6 @@
     i <- i + 1  # index of the replacement character
     arr[index] <- setv[i]  # replacing
   }
-  if (exists(name)) {
-    assign(name, paste0(arr, collapse=''), pos=1L)  # assigning in parent scope
-  }
   return(paste0(arr, collapse=''))
 }
 
@@ -105,8 +102,5 @@
     m$head <- index + 1  # remember last slice index aka new head
   }
   if (m$head %in% 1:length(arr)) m$accu[[m$i + 1]] <- arr[m$head:length(arr)]  # consume remainder
-  if (exists(name)) {
-    assign(name, paste0(unlist(m$accu), collapse=''), pos=1L)  # assigning in parent scope
-  }
   return(paste0(unlist(m$accu), collapse=''))
 }
