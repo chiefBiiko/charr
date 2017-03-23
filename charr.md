@@ -51,7 +51,7 @@ Character subsetting
 
 Subset length 1 character vectors with the indices of its characters using the <code>%i%</code> and <code>%i=%</code> operators. The former performs a get operation whereas the latter performs a set operation.
 
-> The <code>%i=%</code> and <code>%ii=%</code> operators map their input string according to their right operand and return the resulting string. Thus, to really perform a set operation on an existing string variable one has to reassign the return value of the corresponding operator.
+> The <code>%i=%</code> and <code>%ii=%</code> operators map their input string according to their right operand and return the resulting string. Thus, to really perform a *set* operation on an existing string variable one has to reassign the return value of the corresponding operator.
 
 ### Getting characters
 
@@ -84,8 +84,8 @@ Set characters of a length 1 character vector using the <code>%i=%</code> operat
 
 ``` r
 y <- 'no money no funny'
-z <- y %i=% c(c(1, 13:17), c('N', rep('X', 5)))
-print(z)
+y <- y %i=% c(c(1, 13:17), c('N', rep('X', 5)))
+print(y)
 ```
 
     [1] "No money no XXXXX"
