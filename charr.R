@@ -46,7 +46,6 @@
   #   > x %i=% c(c(1, 9), c('C', '@'))
   #   [1] "Crank Fr@ud"
   stopifnot(is.character(a), length(a) == 1)
-  name <- paste0(gsub('\\(|\\)', '', as.character(substitute(a))), collapse='')  # object/variable name
   value <- gsub('"', '', deparse(a))  # character value
   setr <- eval(substitute(b))  # subset vector with indices and replacement values
   seti <- as.integer(setr[1:(length(setr) / 2)])  # indices
@@ -57,6 +56,7 @@
   }
   if (!all(nchar(setv) == 1)) stop('Each replacement value must be a single character only!')
   if (!all(seti %in% 1:nchar(value))) stop('Replacement indices out of bounds!')
+  # mapping
   arr <- unlist(strsplit(value, ''))  # character value split into singletons
   i <- 0
   for (index in seti) {  # index to be replaced
@@ -83,7 +83,6 @@
   #   > 'ABC' %ii=% c(1:2, c('|', '|'))
   #   [1] "A|B|C"
   stopifnot(is.character(a), length(a) == 1)
-  name <- paste0(gsub('\\(|\\)', '', as.character(substitute(a))), collapse='')  # object/variable name
   value <- gsub('"', '', deparse(a))  # character value
   setr <- eval(substitute(b))  # subset vector with indices and replacement values
   seti <- as.integer(setr[1:(length(setr) / 2)])  # indices
@@ -93,8 +92,9 @@
   if (length(setr) %% 2 != 0) {
     stop('The number of replacement indices does not equal the number of replacement characters.')
   }
+  if (!all(seti %in% 1:nchar(value))) stop('Some indices are out of bounds...')
+  # mapping
   arr <- unlist(strsplit(value, ''))  # character value split into singletons
-  if (!all(seti %in% 1:length(arr))) stop('Some indices are out of bounds...')
   m <- list(i=0, head=0, accu=list())  # memory
   for (index in seti) {  # insert after original's index
     m$i <- m$i + 1  # index of slice
