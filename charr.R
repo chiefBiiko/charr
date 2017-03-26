@@ -51,11 +51,12 @@
   seti <- as.integer(setr[1:(length(setr) / 2)])  # indices
   setv <- setr[(length(setr) / 2 + 1):length(setr)]  # vector of replacement values
   # throwing errors
+  if (!all(seti %in% 1:nchar(value))) stop('Replacement indices out of bounds!')
+  if (!all(is.integer(seti) && is.character(setv))) stop('Invalid input types!')
+  if (!all(nchar(setv) == 1)) stop('Each replacement value must be a single character only!')
   if (length(setr) %% 2 != 0) {
     stop('The number of replacement indices does not equal the number of replacement characters.')
   }
-  if (!all(nchar(setv) == 1)) stop('Each replacement value must be a single character only!')
-  if (!all(seti %in% 1:nchar(value))) stop('Replacement indices out of bounds!')
   # mapping
   arr <- unlist(strsplit(value, ''))  # character value split into singletons
   i <- 0
@@ -88,11 +89,11 @@
   seti <- as.integer(setr[1:(length(setr) / 2)])  # indices
   setv <- setr[(length(setr) / 2 + 1):length(setr)]  # vector of replacement values
   # throwing errors
-  if (!all(is.integer(seti) || is.character(setv))) stop('Falsy input!')
+  if (!all(seti %in% 1:nchar(value))) stop('Some indices are out of bounds!')
+  if (!all(is.integer(seti) && is.character(setv))) stop('Invalid input types!')
   if (length(setr) %% 2 != 0) {
     stop('The number of replacement indices does not equal the number of replacement characters.')
   }
-  if (!all(seti %in% 1:nchar(value))) stop('Some indices are out of bounds...')
   # mapping
   arr <- unlist(strsplit(value, ''))  # character value split into singletons
   m <- list(i=0, head=0, accu=list())  # memory
@@ -101,6 +102,7 @@
     m$accu[[m$i]] <- c(arr[m$head:index], setv[m$i])  # split and append
     m$head <- index + 1  # remember last slice index aka new head
   }
-  if (m$head %in% 1:length(arr)) m$accu[[m$i + 1]] <- arr[m$head:length(arr)]  # consume remainder
+  # consume remainder
+  if (m$head %in% 1:length(arr)) m$accu[[m$i + 1]] <- arr[m$head:length(arr)]
   return(paste0(unlist(m$accu), collapse=''))
 }
