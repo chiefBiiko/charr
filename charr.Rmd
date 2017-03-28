@@ -1,6 +1,6 @@
 ---
 title: 'charr - character operators 4 R'
-date: 'March 23, 2017'
+date: 'March 28, 2017'
 output: github_document
 ---
 
@@ -9,7 +9,19 @@ knitr::opts_chunk$set(echo=T, comment=NA)
 source('https://github.com/chiefBiiko/charr/raw/master/charr.R')
 ```
 
-R is a lovely programming language. Nonetheless, working with strings in R can be a little cumbersome. <code>charr</code> attempts to make working with strings and characters in R as easy as ABC. 
+R is a lovely programming language. Nonetheless, working with strings in R can be a little cumbersome. <code>charr</code> attempts to make working with strings and characters in R as easy as ABC.
+
+***
+
+## Operators
+
+| Name              | Purpose            | Usage                                        |
+|-------------------|--------------------|----------------------------------------------|
+|<code>%+%</code>   | Concatenation      | <code>'sakawa' %+% ' spirit'</code>          |
+|<code>%r%</code>   | Repetition         | <code>'Hi' %r% 10</code>                     |
+|<code>%i%</code>   | Getting characters | <code>'Fraudulent Activities' %i% 1:5</code> |
+|<code>%i=%</code>  | Setting characters | <code>'King' %i=% c(2, 'o')</code>           |
+|<code>%ii=%</code> | Insertion          | <code>'abc' %ii=% c(1:2, c('.', '.'))</code> |
 
 ***
 

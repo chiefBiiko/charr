@@ -1,8 +1,21 @@
 charr - character operators 4 R
 ================
-March 23, 2017
+March 28, 2017
 
 R is a lovely programming language. Nonetheless, working with strings in R can be a little cumbersome. <code>charr</code> attempts to make working with strings and characters in R as easy as ABC.
+
+------------------------------------------------------------------------
+
+Operators
+---------
+
+| Name               | Purpose            | Usage                                        |
+|--------------------|--------------------|----------------------------------------------|
+| <code>%+%</code>   | Concatenation      | <code>'sakawa' %+% ' spirit'</code>          |
+| <code>%r%</code>   | Repetition         | <code>'Hi' %r% 10</code>                     |
+| <code>%i%</code>   | Getting characters | <code>'Fraudulent Activities' %i% 1:5</code> |
+| <code>%i=%</code>  | Setting characters | <code>'King' %i=% c(2, 'o')</code>           |
+| <code>%ii=%</code> | Insertion          | <code>'abc' %ii=% c(1:2, c('.', '.'))</code> |
 
 ------------------------------------------------------------------------
 
