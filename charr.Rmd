@@ -1,6 +1,6 @@
 ---
 title: 'charr - character operators 4 R'
-date: 'March 28, 2017'
+date: 'March 29, 2017'
 output: github_document
 ---
 
@@ -15,13 +15,13 @@ R is a lovely programming language. Nonetheless, working with strings in R can b
 
 ## Operators
 
-| Name              | Purpose            | Usage                                        |
-|-------------------|--------------------|----------------------------------------------|
-|<code>%+%</code>   | Concatenation      | <code>'sakawa' %+% ' spirit'</code>          |
-|<code>%r%</code>   | Repetition         | <code>'Hi' %r% 10</code>                     |
-|<code>%i%</code>   | Getting characters | <code>'Fraudulent Activities' %i% 1:5</code> |
-|<code>%i=%</code>  | Setting characters | <code>'King' %i=% c(2, 'o')</code>           |
-|<code>%ii=%</code> | Insertion          | <code>'abc' %ii=% c(1:2, c('.', '.'))</code> |
+| Name              | Purpose                   | Usage                                        |
+|-------------------|---------------------------|----------------------------------------------|
+|<code>%+%</code>   | [Character concatenation] | <code>'sakawa' %+% ' spirit'</code>          |
+|<code>%r%</code>   | [Character repetition]    | <code>'Hi' %r% 10</code>                     |
+|<code>%i%</code>   | [Getting characters]      | <code>'Fraudulent Activities' %i% 1:5</code> |
+|<code>%i=%</code>  | [Setting characters]      | <code>'King' %i=% c(2, 'o')</code>           |
+|<code>%ii=%</code> | [Character insertion]     | <code>'abc' %ii=% c(1:2, c('.', '.'))</code> |
 
 ***
 
