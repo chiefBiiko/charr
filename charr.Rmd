@@ -43,7 +43,7 @@ z <- ' makes lucky'
 
 ## Character repetition
 
-Repeat length 1 character vectors with the <code>%r%</code> operator:
+Repeat a length 1 character vector with the <code>%r%</code> operator:
 
 ```{r}
 'saka' %r% 2
@@ -54,9 +54,9 @@ Repeat length 1 character vectors with the <code>%r%</code> operator:
 
 ## Character subsetting
 
-Subset length 1 character vectors with the indices of its characters using the <code>%i%</code> and <code>%i=%</code> operators. The former performs a get operation whereas the latter performs a set operation.
+Subset a length 1 character vector with the indices of its characters using the <code>%i%</code> and <code>%i=%</code> operators. The former performs a get operation whereas the latter performs a set operation.
 
-> The <code>%i=%</code> and <code>%ii=%</code> operators map their input string according to their right operand and return the resulting string. Thus, to really perform a *set* operation on an existing string variable one has to reassign the return value of the corresponding operator.
+> The <code>%i=%</code> and <code>%ii=%</code> operators map their input string according to their right operand and return the resulting string - a new length 1 character vector. Thus, to really perform a *set* operation on an existing string variable one has to reassign the return value of the corresponding operator.
 
 ### Getting characters
 
