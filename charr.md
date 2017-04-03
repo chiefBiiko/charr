@@ -1,6 +1,6 @@
 charr - character operators 4 R
 ================
-March 29, 2017
+April 03, 2017
 
 R is a lovely programming language. Nonetheless, working with strings in R can be a little cumbersome. <code>charr</code> attempts to make working with strings and characters in R as easy as ABC.
 
@@ -62,9 +62,7 @@ Repeat a length 1 character vector with the <code>%r%</code> operator:
 Character subsetting
 --------------------
 
-Subset a length 1 character vector with the indices of its characters using the <code>%i%</code> and <code>%i=%</code> operators. The former performs a get operation whereas the latter performs a set operation.
-
-> The <code>%i=%</code> and <code>%ii=%</code> operators map their input string according to their right operand and return the resulting string - a new length 1 character vector. Thus, to really perform a *set* operation on an existing string variable one has to reassign the return value of the corresponding operator.
+Subset a length 1 character vector with the indices of its characters using the <code>%i%</code> and <code>%i=%</code> operators. The former performs a get operation whereas the latter performs a [set](#note) operation.
 
 ### Getting characters
 
@@ -87,7 +85,7 @@ In order to erase characters wrap their indices in <code>c()</code> prefixed wit
 
 ### Setting characters
 
-Set characters of a length 1 character vector using the <code>%i=%</code> operator:
+[Set](#note) characters of a length 1 character vector using the <code>%i=%</code> operator:
 
 ``` r
 'HELLO WORLD' %i=% c(7:11, rep('Y', 5))
@@ -126,3 +124,7 @@ print(abc)
     [1] "A|B|C"
 
 The right operand must be a length 2 vector supplying a vector of indices after which to insert strings as first item and a vector of insertion values (strings to insert) as second item. Note that the insertion indices are matched to the insertion values from left to right. Therefore, the number of insertion indices must equal the number of insertion values. The insertion values can be multi character strings.
+
+###### Note
+
+> The <code>%i=%</code> and <code>%ii=%</code> operators map their input string according to their right operand and return the resulting string - a new length 1 character vector. Thus, to really perform a *set* operation on an existing string variable one has to reassign the return value of the corresponding operator.

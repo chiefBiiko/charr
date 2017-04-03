@@ -37,8 +37,7 @@
   #                      2nd item: chr vector with characters to replace;
   #                      the integers/characters of the 1st and 2nd item are
   #                      matched from left to right
-  # @return {chr} Length 1 chr vector with characters in a replaced according to b;
-  #                 if a is an existing object it will be reassigned
+  # @return {chr} Length 1 chr vector with characters in a replaced according to b
   # @example
   #   > 'HELLO WORLD' %i=% c(7:11, rep('Y', 5))
   #   [1] "HELLO YYYYY"
@@ -76,8 +75,7 @@
   #                      2nd item: chr vector with strings to insert;
   #                      the integers/strings of the 1st and 2nd item are
   #                      matched from left to right
-  # @return {chr} Length 1 chr vector with the given strings inserted;
-  #                 if a is an existing object it will be reassigned
+  # @return {chr} Length 1 chr vector with the given strings inserted
   # @example
   #   > 'HELLO WORLD' %ii=% c(c(5, 11), c(',', '!!!'))
   #   [1] "HELLO, WORLD!!!"
