@@ -1,6 +1,6 @@
 ---
 title: 'charr - character operators 4 R'
-date: 'April 03, 2017'
+date: 'April 04, 2017'
 output: github_document
 ---
 
@@ -15,7 +15,7 @@ R is a lovely programming language. Nonetheless, working with strings in R can b
 
 ## Operators
 
-| Name              | Purpose                   | Usage                                        |
+| Symbol            | Purpose                   | Usage                                        |
 |-------------------|---------------------------|----------------------------------------------|
 |<code>%+%</code>   | [Character concatenation] | <code>'sakawa' %+% ' spirit'</code>          |
 |<code>%r%</code>   | [Character repetition]    | <code>'Hi' %r% 10</code>                     |

@@ -101,6 +101,8 @@
     m$head <- index + 1  # remember last slice index aka new head
   }
   # consume remainder
-  if (m$head %in% 1:length(arr)) m$accu[[m$i + 1]] <- arr[m$head:length(arr)]
+  if (m$head %in% 1:length(arr)) {
+    m$accu[[m$i + 1]] <- arr[m$head:length(arr)]
+  }
   return(paste0(unlist(m$accu), collapse=''))
 }

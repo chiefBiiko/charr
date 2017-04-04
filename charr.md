@@ -1,6 +1,6 @@
 charr - character operators 4 R
 ================
-April 03, 2017
+April 04, 2017
 
 R is a lovely programming language. Nonetheless, working with strings in R can be a little cumbersome. <code>charr</code> attempts to make working with strings and characters in R as easy as ABC.
 
@@ -9,7 +9,7 @@ R is a lovely programming language. Nonetheless, working with strings in R can b
 Operators
 ---------
 
-| Name               | Purpose                                             | Usage                                        |
+| Symbol             | Purpose                                             | Usage                                        |
 |--------------------|-----------------------------------------------------|----------------------------------------------|
 | <code>%+%</code>   | [Character concatenation](#character-concatenation) | <code>'sakawa' %+% ' spirit'</code>          |
 | <code>%r%</code>   | [Character repetition](#character-repetition)       | <code>'Hi' %r% 10</code>                     |
