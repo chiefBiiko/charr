@@ -1,22 +1,36 @@
 # Easy string concatenation
 '%+%' <- function(a, b) UseMethod('%+%')  # Generic concat operator
-'%+%.character' <- function(a, b) paste0(a, b)  # String concat operator
-# 'sakawa' %+% ' spirit' %+% ' gives strength'  # 419
+'%+%.character' <- function(a, b) {  # String concat operator
+  # Concatenates two length 1 chr vectors.
+  # @param {chr} a Length 1 chr vector 
+  # @param {chr} b Length 1 chr vector
+  # @example
+  #   > 'heck' %+% ' meck'
+  #  [1] 'heck meck'
+  stopifnot(length(a) == 1, length(b) == 1)
+  return(paste0(a, b))
+}
 
-# Easy string repetition
+# Easy character repetition
 '%r%' <- function(a, b) UseMethod('%r%')  # Generic repeat operator
 '%r%.character' <- function(a, b) {  # String repeat operator
+  # Repeats a length 1 chr vector b times.
+  # @param {chr} a Length 1 chr vector to be repeated
+  # @param {int} b Length 1 integer vector specifiying number of repetitions
+  # @example
+  #   > 'Hi' %r% 3
+  #  [1] 'HiHiHi'
   stopifnot(length(a) == 1, length(b) == 1)
   return(paste0(rep(a, b), collapse=''))
 }
 
-# Easy string subsetting
+# Easy character subsetting
 '%i%' <- function(a, b) UseMethod('%i%')
 '%i%.character' <- function(a, b) {
-  # Gets a string subset.
-  # @param {chr} a String literal or object of class character, must be of length 1
+  # Gets a character subset.
+  # @param {chr} a Character vector, must be of length 1
   # @param {int} b Integer vector with indices 4 subsetting
-  # @return {chr} Character subset as 1 string
+  # @return {chr} Length 1 chr vector
   # @example
   #   > 'Fraudulent Activities' %i% 1:5
   #   [1] "Fraud"
@@ -30,8 +44,8 @@
 
 '%i=%' <- function(a, b) UseMethod('%i=%')
 '%i=%.character' <- function(a, b) {
-  # Sets a string subset.
-  # @param {chr} a String literal or object of class chr, must be of length 1
+  # Sets a character subset.
+  # @param {chr} a Character vector, must be of length 1
   # @param {int/chr} b Vector of length 2, where length(1st) == length(2nd);
   #                      1st item: int vector with indices to replace;
   #                      2nd item: chr vector with characters to replace;
@@ -44,7 +58,7 @@
   #   > x <- 'Frank Fraud'
   #   > x %i=% c(c(1, 9), c('C', '@'))
   #   [1] "Crank Fr@ud"
-  stopifnot(is.character(a), length(a) == 1)
+  stopifnot(length(a) == 1, nchar(a) > 0)
   value <- gsub('"', '', deparse(a))  # character value
   setr <- eval(substitute(b))  # subset vector with indices and replacement values
   seti <- as.integer(setr[1:(length(setr) / 2)])  # indices
@@ -66,10 +80,11 @@
   return(paste0(arr, collapse=''))
 }
 
+# Easy character insertion 
 '%ii=%' <- function(a, b) UseMethod('%ii=%')
 '%ii=%.character' <- function(a, b) {
-  # Inserts characters into a string after specified indices.
-  # @param {chr} a String literal or object of class chr, must be of length 1
+  # Inserts characters into a length 1 chr vector after specified indices.
+  # @param {chr} a Character vector, must be of length 1
   # @param {int/chr} b Vector of length 2, where length(1st) == length(2nd);
   #                      1st item: int vector with indices to insert after;
   #                      2nd item: chr vector with strings to insert;
@@ -81,7 +96,7 @@
   #   [1] "HELLO, WORLD!!!"
   #   > 'ABC' %ii=% c(1:2, c('|', '|'))
   #   [1] "A|B|C"
-  stopifnot(is.character(a), length(a) == 1)
+  stopifnot(length(a) == 1)
   value <- gsub('"', '', deparse(a))  # character value
   setr <- eval(substitute(b))  # subset vector with indices and replacement values
   seti <- as.integer(setr[1:(length(setr) / 2)])  # indices
