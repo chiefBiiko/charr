@@ -4,6 +4,7 @@
   # Concatenates two length 1 chr vectors.
   # @param {chr} a Length 1 chr vector 
   # @param {chr} b Length 1 chr vector
+  # @return {chr} Length 1 chr vector
   # @example
   #   > 'heck' %+% ' meck'
   #  [1] 'heck meck'
@@ -17,6 +18,7 @@
   # Repeats a length 1 chr vector b times.
   # @param {chr} a Length 1 chr vector to be repeated
   # @param {int} b Length 1 integer vector specifiying number of repetitions
+  # @return {chr} Length 1 chr vector
   # @example
   #   > 'Hi' %r% 3
   #  [1] 'HiHiHi'
@@ -28,7 +30,7 @@
 '%i%' <- function(a, b) UseMethod('%i%')
 '%i%.character' <- function(a, b) {
   # Gets a character subset.
-  # @param {chr} a Character vector, must be of length 1
+  # @param {chr} a Chr vector, must be of length 1
   # @param {int} b Integer vector with indices 4 subsetting
   # @return {chr} Length 1 chr vector
   # @example
@@ -45,7 +47,7 @@
 '%i=%' <- function(a, b) UseMethod('%i=%')
 '%i=%.character' <- function(a, b) {
   # Sets a character subset.
-  # @param {chr} a Character vector, must be of length 1
+  # @param {chr} a Chr vector, must be of length 1
   # @param {int/chr} b Vector of length 2, where length(1st) == length(2nd);
   #                      1st item: int vector with indices to replace;
   #                      2nd item: chr vector with characters to replace;
@@ -84,13 +86,13 @@
 '%ii=%' <- function(a, b) UseMethod('%ii=%')
 '%ii=%.character' <- function(a, b) {
   # Inserts characters into a length 1 chr vector after specified indices.
-  # @param {chr} a Character vector, must be of length 1
+  # @param {chr} a Chr vector, must be of length 1
   # @param {int/chr} b Vector of length 2, where length(1st) == length(2nd);
   #                      1st item: int vector with indices to insert after;
   #                      2nd item: chr vector with strings to insert;
   #                      the integers/strings of the 1st and 2nd item are
   #                      matched from left to right
-  # @return {chr} Length 1 chr vector with the given strings inserted
+  # @return {chr} Length 1 chr vector with the given characters inserted
   # @example
   #   > 'HELLO WORLD' %ii=% c(c(5, 11), c(',', '!!!'))
   #   [1] "HELLO, WORLD!!!"
