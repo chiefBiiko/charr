@@ -1,6 +1,6 @@
 charr - character operators 4 R
 ================
-April 04, 2017
+April 26, 2017
 
 R is a lovely programming language. Nonetheless, working with strings in R can be a little cumbersome. <code>charr</code> attempts to make working with strings and characters in R as easy as ABC.
 
@@ -101,7 +101,7 @@ print(y)
 
     [1] "No money no XXXXX"
 
-The right operand must be a length 2 vector supplying a vector of replacement indices as first item and a vector of replacement values as second item. Note that the replacement indices are matched to the replacement values from left to right. Therefore, the number of replacement indices must equal the number of replacement values. Each replacement value must be a single character.
+The right operand must be a length 2 vector supplying a vector of replacement indices as first item and a vector of replacement values as second item. Each replacement value must be a single character. The number of replacement indices must equal the number of replacement values.
 
 ------------------------------------------------------------------------
 
@@ -123,7 +123,7 @@ print(abc)
 
     [1] "A|B|C"
 
-The right operand must be a length 2 vector supplying a vector of indices after which to insert strings as first item and a vector of insertion values (strings to insert) as second item. Note that the insertion indices are matched to the insertion values from left to right. Therefore, the number of insertion indices must equal the number of insertion values. The insertion values can be multi character strings.
+The right operand must be a length 2 vector supplying a vector of indices after which to insert strings as first item and a vector of insertion values (strings to insert) as second item. The insertion values can be multi character strings. The number of insertion indices must equal the number of insertion values.
 
 ###### Note
 
