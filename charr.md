@@ -81,7 +81,7 @@ print(x)
 
     [1] "Get rid of characters"
 
-In order to erase characters wrap their indices in <code>c()</code> prefixed with a minus sign. If the supplied subset indices are out of bounds (exceed the number of characters of the left operand) the return value contains all characters from the supplied start index until the end of the input string.
+In order to erase characters wrap their indices in <code>c()</code> prefixed with a minus sign. If the supplied subset indices are out of bounds the return value contains all characters from the supplied start index until the end of the input string.
 
 ### Setting characters
 
@@ -123,7 +123,7 @@ print(abc)
 
     [1] "A|B|C"
 
-The right operand must be a length 2 vector supplying a vector of indices after which to insert strings as first item and a vector of insertion values (strings to insert) as second item. The insertion values can be multi character strings. The number of insertion indices must equal the number of insertion values.
+The right operand must be a length 2 vector supplying a vector of indices after which to insert strings as first item and a vector of insertion values as second item. The insertion values can be multi character strings. The number of insertion indices must equal the number of insertion values.
 
 ###### Note
 
